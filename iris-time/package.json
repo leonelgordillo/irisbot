@@ -4,7 +4,7 @@
   "description": "",
   "main": "server/service.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "nyc mocha --recursive test",
     "start": "node bin/run.js"
   },
   "author": "",
@@ -14,5 +14,11 @@
     "express": "^4.14.0",
     "moment": "^2.24.0",
     "superagent": "^5.0.2"
+  },
+  "devDependencies": {
+    "mocha": "^6.1.1",
+    "nyc": "^13.3.0",
+    "should": "^13.2.3",
+    "supertest": "^4.0.2"
   }
 }

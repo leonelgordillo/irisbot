@@ -1,0 +1,30 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Iris Debugger",
+            "program": "${workspaceRoot}/iris/bin/run.js",
+            "cwd": "${workspaceRoot}/iris"
+
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Iris-time Debugger",
+            "program": "${workspaceRoot}/iris-time/bin/run.js",
+            "cwd": "${workspaceRoot}/iris-time"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Iris-weather Debugger",
+            "program": "${workspaceRoot}/iris-weather/bin/run.js",
+            "cwd": "${workspaceRoot}/iris-weather"
+        }
+    ]
+}
