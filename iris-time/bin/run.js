@@ -20,7 +20,7 @@ server.on('listening', function() {
                 return;
             }
 
-            log(response.body);
+            log.info(response.body);
         });
     };
 

@@ -7,6 +7,13 @@
     "test": "set NODE_ENV=test&&eslint bin server && nyc mocha --recursive test",
     "start": "node bin/run.js | bunyan"
   },
+  "engines": {
+    "node": "8.11.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leonelgordillo/irisbot.git"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
