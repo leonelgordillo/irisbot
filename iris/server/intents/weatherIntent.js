@@ -2,7 +2,7 @@
 
 const request = require('superagent');
 
-module.exports.process = function process(intentData, registry, cb) {
+module.exports.process = function process(intentData, registry, log, cb) {
 
     if(intentData.intent[0].value !== 'weather')
         return cb(new Error(`Expected weather intent, got ${intentData.intent[0].value}`));
@@ -16,10 +16,10 @@ module.exports.process = function process(intentData, registry, cb) {
 
     request.get(`http://${service.ip}:${service.port}/service/${location}`, (err, res) => {
         if(err || res.statusCode != 200 || !res.body.result) {
-            console.log(err);
+            log.error(err);
             return cb(false, `I had a problem finding out the weather in ${location}`);
         }
         
         return cb(false, `The current weather in ${location} is ${res.body.result}`);
     });   
-}
+};

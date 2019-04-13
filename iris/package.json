@@ -4,7 +4,7 @@
   "description": "",
   "main": "server/service.js",
   "scripts": {
-    "test": "nyc mocha --recursive test",
+    "test": "eslint bin server && nyc mocha --recursive test",
     "start": "node bin/run.js"
   },
   "author": "",
@@ -13,6 +13,7 @@
     "@slack/client": "^5.0.0",
     "@slack/events-api": "^2.2.0",
     "@slack/web-api": "^5.0.0",
+    "bunyan": "^1.8.12",
     "dotenv": "^7.0.0",
     "express": "^4.14.0",
     "superagent": "^5.0.2"

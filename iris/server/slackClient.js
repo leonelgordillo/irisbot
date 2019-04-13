@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const { RTMClient } = require('@slack/rtm-api');
 // An access token (from your Slack app or custom integration - usually xoxb)
@@ -17,17 +17,18 @@ module.exports.init = function slackClient(token, logLevel, nlpClient, serviceRe
 
     */
 
-    constructor(token, logLevel, nlp, registry) {
+    constructor(token, logLevel, nlp, registry, log) {
         this._rtm = new RTMClient(token, { logLevel: logLevel });
         this._nlp = nlp;
         this._registry = registry;
+        this._log = log;
 
         this._addAuthenticatedHandler(this._handleOnAuthenticated);
         this._rtm.on('message', this._handleOnMessage.bind(this));
     }
 
     _handleOnAuthenticated(rtmStartData) {
-        console.log(`Logged in as ${rtmStartData.self.name} or team ${rtmStartData.team.name}, but not yet connected to the channel`)
+        this._log.info(`Logged in as ${rtmStartData.self.name} or team ${rtmStartData.team.name}, but not yet connected to the channel`);
     }
 
     _addAuthenticatedHandler(handler) {
@@ -38,21 +39,21 @@ module.exports.init = function slackClient(token, logLevel, nlpClient, serviceRe
         if (message.text.toLowerCase().includes('iris')) {
             this._nlp.ask(message.text, (err, res) => {
                 if (err) {
-                    console.log(err);
+                    this._log.error(err);
                     return;
                 }
-                console.log(res);
+                this._log.info(res);
                 try {
-                    console.log(res.intent);
+                    this._log.info(res.intent);
                     if (!res.intent || !res.intent[0] || !res.intent[0].value) {
                         throw new Error('Could not extract intent.');
                     }
 
                     const intent = require('./intents/' + res.intent[0].value + 'Intent');
 
-                    intent.process(res, this._registry, (error, response) => {
+                    intent.process(res, this._registry, this.log, (error, response) => {
                         if (error) {
-                            console.log(error.message);
+                            this._log.error(error.message);
                             return;
                         }
 
@@ -60,8 +61,8 @@ module.exports.init = function slackClient(token, logLevel, nlpClient, serviceRe
                     });
 
                 } catch (err) {
-                    console.log(err);
-                    console.log(res);
+                    this._log.error(err);
+                    this._log.error(res);
                     this._rtm.sendMessage('Sorry, I don\'t know what you are talking about!', message.channel);
                 }
             });
