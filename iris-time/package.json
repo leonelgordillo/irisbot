@@ -4,7 +4,7 @@
   "description": "",
   "main": "server/service.js",
   "scripts": {
-    "test": "set NODE_ENV=test&&eslint bin server && nyc mocha --recursive test",
+    "test": "set NODE_ENV=test&&snyk test&&eslint bin server && nyc mocha --recursive test --exit",
     "start": "node bin/run.js | bunyan"
   },
   "author": "",
