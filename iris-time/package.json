@@ -12,7 +12,7 @@
   "dependencies": {
     "bunyan": "^1.8.12",
     "dotenv": "^7.0.0",
-    "express": "^4.14.0",
+    "express": "^4.17.3",
     "moment": "^2.24.0",
     "superagent": "^5.0.2"
   },
